@@ -70,9 +70,12 @@ public class Gui extends JFrame implements Runnable {
             }
         }
 
+        //Draw Score
         dbg.setColor(Color.BLACK);
+        dbg.setFont(new Font(dbg.getFont().getName(), 0, 50));
         dbg.drawString("Player One: " + Main.playerOne.points, 100, 100);
-        dbg.drawString("Player Two: " + Main.playerTwo.points, 100, 150);
+        dbg.setColor(Color.white);
+        dbg.drawString("Player Two: " + Main.playerTwo.points, (1920 - dbg.getFontMetrics().stringWidth("Player Two: " + Main.playerTwo.points)) - 100 , 100);
 
         //Swap Buffer
         g.drawImage(dbImage, 0, 0, null);
@@ -82,6 +85,7 @@ public class Gui extends JFrame implements Runnable {
     private void init() {
         setSize(WIDTH, HEIGHT);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setUndecorated(true);
         setVisible(true);
         boardBeginningX = ((getWidth() / 2) - (board.getWidth()/2)) + 42;
         boardBeginningY = ((getHeight() / 2) - (board.getHeight()/2)) + 42;
