@@ -10,6 +10,9 @@ public class InputHandler {
                     if(Main.stones[(n.x + 23 - Main.board.x)/30][(n.y + 23 - Main.board.y)/30]== null) {
                         Main.stones[(n.x + 23 - Main.board.x) / 30][(n.y + 23 - Main.board.y) / 30] = new Stone(Main.getActivePlayer().color);
                         Main.switchPlayer();
+                        FloodFiller.removeStonesFromCounter((n.x + 23 - Main.board.x)/30,(n.y + 23 - Main.board.y)/30);
+                        Main.playerOne.updateScore();
+                        Main.playerTwo.updateScore();
                     }
                 });
             }
