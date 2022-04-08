@@ -1,9 +1,9 @@
-import org.checkerframework.checker.units.qual.A;
-
 import java.awt.*;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collections;
+
+import static me.pr3.catcher.Catcher.TRY;
 
 public class FloodFiller {
 
@@ -53,7 +53,7 @@ public class FloodFiller {
         for (Offsets offset : Offsets.values()) {
             Point offsetPoint = offset.offsetPoint(point);
             //Check if the neighbour point is not empty
-            try {
+            TRY(() -> {
                 if (Main.stones[offsetPoint.x][offsetPoint.y] != null) {
                     //Check if the neighbour point is not the same color as our initial point
                     if (Main.stones[offsetPoint.x][offsetPoint.y].getColor() != originColor) {
@@ -68,9 +68,7 @@ public class FloodFiller {
                         });
                     }
                 }
-            }catch (ArrayIndexOutOfBoundsException ignored){
-                //No need to do any checks on points that are outside the board
-            }
+            });
         }
 
     }
@@ -83,7 +81,7 @@ public class FloodFiller {
         for (Offsets offset : Offsets.values()) {
             Point offsetPoint = offset.offsetPoint(point);
             //Check if stone is there
-            try {
+            TRY(() -> {
                 if (Main.stones[offsetPoint.x][offsetPoint.y] != null) {
                     //Check if stone is of the same color
                     if (Main.stones[offsetPoint.x][offsetPoint.y].getColor() == color && !checkedPoints.contains(offsetPoint)) {
@@ -93,9 +91,7 @@ public class FloodFiller {
                 } else {
                     foundNeighbourless = true;
                 }
-            }catch (ArrayIndexOutOfBoundsException ignored){
-                System.out.println("OutOfBounds");
-            }
+            });
         }
         //return the list
         checkedPoints.addAll(points);
