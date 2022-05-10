@@ -11,6 +11,21 @@ public class Player {
     }
 
     public void updateScore() {
-       points = (int) Arrays.stream(Main.stones).flatMap(Arrays::stream).filter(Objects::nonNull).filter(n -> n.getColor() == color).filter(Stone::isCounted).count();
+        long count = 0L;
+        Stone[][] stones = Main.stones;
+        for (int i = 0; i < stones.length; i++) {
+            Stone[] stone = stones[i];
+            for (int j = 0; j < stone.length; j++) {
+                Stone n = stone[j];
+                if (n != null) {
+                    if (n.getColor() == color) {
+                        if (n.isCounted()) {
+                            count++;
+                        }
+                    }
+                }
+            }
+        }
+        points = (int) count;
     }
 }
