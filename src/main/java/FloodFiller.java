@@ -78,7 +78,9 @@ public class FloodFiller {
         ArrayList<Point> points = new ArrayList<>();
         //Get all surrounding points
         checkedPoints.add(point);
-        for (Offsets offset : Offsets.values()) {
+        Offsets[] values = Offsets.values();
+        for (int i = 0, valuesLength = values.length; i < valuesLength; i++) {
+            Offsets offset = values[i];
             Point offsetPoint = offset.offsetPoint(point);
             //Check if stone is there
             TRY(() -> {
