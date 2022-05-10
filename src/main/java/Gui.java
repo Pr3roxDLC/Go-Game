@@ -64,10 +64,10 @@ public class Gui extends JFrame implements Runnable {
                     dbg.setColor(Color.BLACK);
                     dbg.drawOval(x * 30 + boardBeginningX - 7, y * 30 + boardBeginningY - 7, 20, 20);
                 }
-                if (Main.stones[x][y].isCounted()) {
-                    dbg.setColor(Color.GREEN);
-                    dbg.drawOval(x * 30 + boardBeginningX - 7, y * 30 + boardBeginningY - 7, 20, 20);
-                }
+//                if (Main.stones[x][y].isCounted()) {
+//                    dbg.setColor(Color.GREEN);
+//                    dbg.drawOval(x * 30 + boardBeginningX - 7, y * 30 + boardBeginningY - 7, 20, 20);
+//                }
             }
         }
 
