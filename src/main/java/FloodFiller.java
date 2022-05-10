@@ -3,8 +3,6 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import static me.pr3.catcher.Catcher.TRY;
-
 public class FloodFiller {
 
     public static boolean foundNeighbourless = false;
@@ -53,7 +51,7 @@ public class FloodFiller {
         for (Offsets offset : Offsets.values()) {
             Point offsetPoint = offset.offsetPoint(point);
             //Check if the neighbour point is not empty
-            TRY(() -> {
+            try{
                 if (Main.stones[offsetPoint.x][offsetPoint.y] != null) {
                     //Check if the neighbour point is not the same color as our initial point
                     if (Main.stones[offsetPoint.x][offsetPoint.y].getColor() != originColor) {
@@ -68,7 +66,7 @@ public class FloodFiller {
                         });
                     }
                 }
-            });
+            }catch (Exception ignored){}
         }
 
     }
@@ -83,7 +81,7 @@ public class FloodFiller {
             Offsets offset = values[i];
             Point offsetPoint = offset.offsetPoint(point);
             //Check if stone is there
-            TRY(() -> {
+            try{
                 if (Main.stones[offsetPoint.x][offsetPoint.y] != null) {
                     //Check if stone is of the same color
                     if (Main.stones[offsetPoint.x][offsetPoint.y].getColor() == color && !checkedPoints.contains(offsetPoint)) {
@@ -93,7 +91,7 @@ public class FloodFiller {
                 } else {
                     foundNeighbourless = true;
                 }
-            });
+            }catch (Exception ignored){}
         }
         //return the list
         checkedPoints.addAll(points);

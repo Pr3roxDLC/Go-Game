@@ -3,7 +3,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 
-import static me.pr3.catcher.Catcher.TRY;
 
 public class Gui extends JFrame implements Runnable {
 
@@ -25,7 +24,11 @@ public class Gui extends JFrame implements Runnable {
         init();
         while (true) {
             onTick();
-            TRY(() -> Thread.sleep(15));
+            try {
+                Thread.sleep(15);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
