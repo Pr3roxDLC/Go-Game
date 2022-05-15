@@ -13,6 +13,7 @@ public class Gui extends JFrame implements Runnable {
 
     public static BufferedImage board = FileUtils.loadImage("/Go_board.png");
 
+
     public static int boardBeginningX, boardBeginningY = 0;
 
     public Gui() {
@@ -48,6 +49,7 @@ public class Gui extends JFrame implements Runnable {
 
         dbg.setColor(Color.RED);
         dbg.fillRect(0, 0, WIDTH, HEIGHT);
+        ((Graphics2D)dbg).setStroke(new BasicStroke(1));
 
         dbg.drawImage(board, (int) ((getWidth() / 2) - (board.getWidth() / 2)), (int) ((getHeight() / 2) - (board.getHeight() / 2)), null);
 
@@ -78,6 +80,16 @@ public class Gui extends JFrame implements Runnable {
         dbg.setColor(Color.white);
         dbg.drawString("Player Two: " + Main.playerTwo.points, (1920 - dbg.getFontMetrics().stringWidth("Player Two: " + Main.playerTwo.points)) - 100, 100);
 
+        //Draw Buttons
+        dbg.setColor(Main.skipButton.color);
+        dbg.fillRect(Main.skipButton.rectangle.x, Main.skipButton.rectangle.y, Main.skipButton.rectangle.width, Main.skipButton.rectangle.height);
+        dbg.setColor(Main.skipButton.textColor);
+        int length = dbg.getFontMetrics().stringWidth(Main.skipButton.text);
+        dbg.drawString(Main.skipButton.text, (int) (Main.skipButton.rectangle.getMaxX() - Main.skipButton.rectangle.width / 2 - length/2), Main.skipButton.rectangle.y + Main.skipButton.rectangle.height / 2 + 15);
+        ((Graphics2D)dbg).setStroke(new BasicStroke(10));
+        dbg.drawRect(Main.skipButton.rectangle.x, Main.skipButton.rectangle.y, Main.skipButton.rectangle.width, Main.skipButton.rectangle.height);
+
+
         //Swap Buffer
         g.drawImage(dbImage, 0, 0, null);
 
@@ -85,6 +97,7 @@ public class Gui extends JFrame implements Runnable {
 
     private void init() {
         setSize(WIDTH, HEIGHT);
+        setTitle("Go");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setUndecorated(true);
         setVisible(true);
@@ -99,5 +112,9 @@ public class Gui extends JFrame implements Runnable {
             }
         }
         Main.board = new Rectangle(boardBeginningX, boardBeginningY, board.getWidth(), board.getHeight());
+
+        Main.skipButton = new Button(new Rectangle(WIDTH/2 - 200, 900, 400, 100), Color.BLACK, "Skip", () -> {
+            Main.skip();
+        });
     }
 }

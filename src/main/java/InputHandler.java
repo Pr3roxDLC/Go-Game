@@ -15,7 +15,10 @@ public class InputHandler {
                         Main.playerTwo.updateScore();
                     }
                 });
+            } else if (Main.skipButton.rectangle.contains(e.getPoint())) {
+                Main.skipButton.click();
             }
+
     }
 
 }
