@@ -1,10 +1,6 @@
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Objects;
-
 public class Player {
     int points = 0;
-    Stone.Color color = Stone.Color.BLACK;
+    Stone.Color color;
 
     public Player(Stone.Color color) {
         this.color = color;

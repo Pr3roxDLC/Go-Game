@@ -1,36 +1,19 @@
 import java.awt.*;
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class FloodFiller {
 
-    public static boolean foundNeighbourless = false;
+    public static boolean foundWithoutNeighbour = false;
 
-    public static enum Offsets {
+    public enum Offsets {
         UP(0, 1),
         DOWN(0, -1),
         LEFT(-1, 0),
         RIGHT(1, 0);
 
-        int x = 0;
-        int y = 0;
-
-        public int getX() {
-            return x;
-        }
-
-        public void setX(int x) {
-            this.x = x;
-        }
-
-        public int getY() {
-            return y;
-        }
-
-        public void setY(int y) {
-            this.y = y;
-        }
+        final int x;
+        final int y;
 
         Offsets(int x, int y) {
             this.x = x;
@@ -44,7 +27,7 @@ public class FloodFiller {
 
     //Takes the position of a stone and flags all getStones() that will get surrounded by the placement of this stone
     public static void removeStonesFromCounter(int x, int y) {
-        foundNeighbourless = false;
+        foundWithoutNeighbour = false;
         Point point = new Point(x, y);
         Stone.Color originColor = Main.getStones()[x][y].getColor();
         //Check for the 4 neighbours of the original stone
@@ -59,7 +42,7 @@ public class FloodFiller {
                         System.out.println("Removing Stones");
                         getAllSurroundedStones(Main.getStones()[offsetPoint.x][offsetPoint.y].getColor(), offsetPoint, new ArrayList<>(Collections.singleton(offsetPoint))).forEach(n -> {
                             //Remove all surrounded getStones() from the score counter
-                            if (!foundNeighbourless) {
+                            if (!foundWithoutNeighbour) {
                                 System.out.println(n);
                                 Main.getStones()[n.x][n.y].setCounted(false);
                             }
@@ -89,7 +72,7 @@ public class FloodFiller {
                         points.addAll(getAllSurroundedStones(color, offsetPoint, checkedPoints));
                     }
                 } else {
-                    foundNeighbourless = true;
+                    foundWithoutNeighbour = true;
                 }
             }catch (Exception ignored){}
         }

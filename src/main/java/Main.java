@@ -6,7 +6,6 @@ public class Main {
 
 
     public static Button SKIP_BUTTON;
-    public static Button GIVE_UP_BUTTON;
 
     private static int timesSkipped = 0;
 
@@ -14,11 +13,11 @@ public class Main {
     public static Player PLAYER_TWO = new Player(Stone.Color.WHITE);
     public static ActivePlayer activePlayer = ActivePlayer.ONE;
 
-    private static Stone[][] stones = new Stone[19][19];
-    private static Point[][] points = new Point[19][19];
+    private static final Stone[][] stones = new Stone[19][19];
+    private static final Point[][] points = new Point[19][19];
     public static Rectangle board;
 
-    public static enum ActivePlayer {
+    public enum ActivePlayer {
         ONE, TWO
     }
 

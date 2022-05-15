@@ -21,7 +21,7 @@ public class Stone {
         this.counted = counted;
     }
 
-    public static enum Color{
+    public enum Color{
 
         BLACK(java.awt.Color.BLACK), WHITE(java.awt.Color.WHITE);
 
