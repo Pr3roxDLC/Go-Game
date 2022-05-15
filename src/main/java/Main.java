@@ -6,6 +6,7 @@ public class Main {
 
 
     public static Button SKIP_BUTTON;
+    public static Button REPLAY_BUTTON;
 
     private static int timesSkipped = 0;
 
@@ -65,6 +66,7 @@ public class Main {
     }
 
     public static void showEndScreen(){
+        REPLAY_BUTTON.setActive(true);
         System.out.println(PLAYER_ONE.points + " " + PLAYER_TWO.points);
         if(PLAYER_ONE.points > PLAYER_TWO.points){
             GAME_STATE = State.PLAYER_ONE_WON;
@@ -98,6 +100,8 @@ public class Main {
         return true;
     }
 
-
+    public static void restartGame(){
+        REPLAY_BUTTON.setActive(false);
+    }
 
 }

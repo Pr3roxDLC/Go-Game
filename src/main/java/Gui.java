@@ -110,6 +110,16 @@ public class Gui extends JFrame implements Runnable {
             dbg.setColor(Color.WHITE);
             dbg.drawString(text, WIDTH/2 - dbg.getFontMetrics().stringWidth(text) / 2, HEIGHT/2);
 
+            dbg.setColor(Main.REPLAY_BUTTON.getColor());
+            dbg.fillRect(Main.REPLAY_BUTTON.getRectangle().x, Main.REPLAY_BUTTON.getRectangle().y, Main.REPLAY_BUTTON.getRectangle().width, Main.REPLAY_BUTTON.getRectangle().height);
+            dbg.setColor(Main.REPLAY_BUTTON.getTextColor());
+            int length2 = dbg.getFontMetrics().stringWidth(Main.REPLAY_BUTTON.getText());
+            dbg.drawString(Main.REPLAY_BUTTON.getText(), (int) (Main.REPLAY_BUTTON.getRectangle().getMaxX() - Main.REPLAY_BUTTON.getRectangle().width / 2 - length2/2), Main.REPLAY_BUTTON.getRectangle().y + Main.REPLAY_BUTTON.getRectangle().height / 2 + 15);
+            ((Graphics2D)dbg).setStroke(new BasicStroke(10));
+            dbg.drawRect(Main.REPLAY_BUTTON.getRectangle().x, Main.REPLAY_BUTTON.getRectangle().y, Main.REPLAY_BUTTON.getRectangle().width, Main.REPLAY_BUTTON.getRectangle().height);
+
+
+
         }
 
         //Swap Buffer
@@ -136,5 +146,7 @@ public class Gui extends JFrame implements Runnable {
         Main.board = new Rectangle(boardBeginningX, boardBeginningY, board.getWidth(), board.getHeight());
 
         Main.SKIP_BUTTON = new Button(new Rectangle(WIDTH/2 - 200, 900, 400, 100), Color.BLACK, "Skip", Main::skip);
+        Main.REPLAY_BUTTON = new Button(new Rectangle(WIDTH/2 - 200, 600, 400, 100), Color.WHITE, "New Game", Main::restartGame);
+        Main.REPLAY_BUTTON.setActive(false);
     }
 }

@@ -8,6 +8,8 @@ public class Button {
     private final String text;
     private Color textColor;
 
+    private boolean active = true;
+
     public Button(Rectangle rectangle, Color color, String string, Runnable runnable){
         this(rectangle, color, string);
         this.runnable = runnable;
@@ -39,6 +41,15 @@ public class Button {
 
     public Color getTextColor() {
         return textColor;
+    }
+
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public void click(){

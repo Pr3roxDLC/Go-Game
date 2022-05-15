@@ -17,6 +17,8 @@ public class InputHandler {
                 });
             } else if (Main.SKIP_BUTTON.getRectangle().contains(e.getPoint())) {
                 Main.SKIP_BUTTON.click();
+            }  else if(Main.REPLAY_BUTTON.isActive() && Main.REPLAY_BUTTON.getRectangle().contains(e.getPoint())){
+                Main.REPLAY_BUTTON.click();
             }
 
     }
