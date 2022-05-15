@@ -4,17 +4,18 @@ public class Main {
 
     public static Gui gui;
 
-    public static Button skipButton;
-    public static Button giveUpButton;
 
-    public static int timesSkipped = 0;
+    public static Button SKIP_BUTTON;
+    public static Button GIVE_UP_BUTTON;
 
-    public static Player playerOne = new Player(Stone.Color.BLACK);
-    public static Player playerTwo = new Player(Stone.Color.WHITE);
+    private static int timesSkipped = 0;
+
+    public static Player PLAYER_ONE = new Player(Stone.Color.BLACK);
+    public static Player PLAYER_TWO = new Player(Stone.Color.WHITE);
     public static ActivePlayer activePlayer = ActivePlayer.ONE;
 
-    public static Stone[][] stones = new Stone[19][19];
-    public static Point[][] points = new Point[19][19];
+    private static Stone[][] stones = new Stone[19][19];
+    private static Point[][] points = new Point[19][19];
     public static Rectangle board;
 
     public static enum ActivePlayer {
@@ -28,7 +29,7 @@ public class Main {
     public static void switchPlayer() {
         timesSkipped = 0;
         activePlayer = activePlayer == ActivePlayer.ONE ? ActivePlayer.TWO : ActivePlayer.ONE;
-        Main.skipButton.setColor(Main.getActivePlayer().color.getColor());
+        Main.SKIP_BUTTON.setColor(Main.getActivePlayer().color.getColor());
     }
 
     public static void skip() {
@@ -37,7 +38,7 @@ public class Main {
             giveUp();
         }
         activePlayer = activePlayer == ActivePlayer.ONE ? ActivePlayer.TWO : ActivePlayer.ONE;
-        Main.skipButton.setColor(Main.getActivePlayer().color.getColor());
+        Main.SKIP_BUTTON.setColor(Main.getActivePlayer().color.getColor());
     }
 
     public static void giveUp() {
@@ -45,6 +46,14 @@ public class Main {
     }
 
     public static Player getActivePlayer() {
-        return activePlayer == ActivePlayer.ONE ? playerOne : playerTwo;
+        return activePlayer == ActivePlayer.ONE ? PLAYER_ONE : PLAYER_TWO;
+    }
+
+    public static Stone[][] getStones() {
+        return stones;
+    }
+
+    public static Point[][] getPoints() {
+        return points;
     }
 }

@@ -3,9 +3,38 @@ import java.awt.*;
 public class Button {
 
     private Runnable runnable = null;
-    public Rectangle rectangle = null;
-    public Color color = null;
-    public String text = "";
+
+    public Rectangle getRectangle() {
+        return rectangle;
+    }
+
+    public void setRectangle(Rectangle rectangle) {
+        this.rectangle = rectangle;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public Color getTextColor() {
+        return textColor;
+    }
+
+    public void setTextColor(Color textColor) {
+        this.textColor = textColor;
+    }
+
+    private Rectangle rectangle = null;
+    private Color color = null;
+    private String text = "";
 
     public Color textColor = null;
 

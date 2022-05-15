@@ -42,26 +42,26 @@ public class FloodFiller {
         }
     }
 
-    //Takes the position of a stone and flags all stones that will get surrounded by the placement of this stone
+    //Takes the position of a stone and flags all getStones() that will get surrounded by the placement of this stone
     public static void removeStonesFromCounter(int x, int y) {
         foundNeighbourless = false;
         Point point = new Point(x, y);
-        Stone.Color originColor = Main.stones[x][y].getColor();
+        Stone.Color originColor = Main.getStones()[x][y].getColor();
         //Check for the 4 neighbours of the original stone
         for (Offsets offset : Offsets.values()) {
             Point offsetPoint = offset.offsetPoint(point);
             //Check if the neighbour point is not empty
             try{
-                if (Main.stones[offsetPoint.x][offsetPoint.y] != null) {
+                if (Main.getStones()[offsetPoint.x][offsetPoint.y] != null) {
                     //Check if the neighbour point is not the same color as our initial point
-                    if (Main.stones[offsetPoint.x][offsetPoint.y].getColor() != originColor) {
+                    if (Main.getStones()[offsetPoint.x][offsetPoint.y].getColor() != originColor) {
                         //Get all Stones that will become surrounded by the placement of the stone
                         System.out.println("Removing Stones");
-                        getAllSurroundedStones(Main.stones[offsetPoint.x][offsetPoint.y].getColor(), offsetPoint, new ArrayList<>(Collections.singleton(offsetPoint))).forEach(n -> {
-                            //Remove all surrounded stones from the score counter
+                        getAllSurroundedStones(Main.getStones()[offsetPoint.x][offsetPoint.y].getColor(), offsetPoint, new ArrayList<>(Collections.singleton(offsetPoint))).forEach(n -> {
+                            //Remove all surrounded getStones() from the score counter
                             if (!foundNeighbourless) {
                                 System.out.println(n);
-                                Main.stones[n.x][n.y].setCounted(false);
+                                Main.getStones()[n.x][n.y].setCounted(false);
                             }
                         });
                     }
@@ -82,9 +82,9 @@ public class FloodFiller {
             Point offsetPoint = offset.offsetPoint(point);
             //Check if stone is there
             try{
-                if (Main.stones[offsetPoint.x][offsetPoint.y] != null) {
+                if (Main.getStones()[offsetPoint.x][offsetPoint.y] != null) {
                     //Check if stone is of the same color
-                    if (Main.stones[offsetPoint.x][offsetPoint.y].getColor() == color && !checkedPoints.contains(offsetPoint)) {
+                    if (Main.getStones()[offsetPoint.x][offsetPoint.y].getColor() == color && !checkedPoints.contains(offsetPoint)) {
                         //repeat for all neighbours, and add all the resulting points to our list
                         points.addAll(getAllSurroundedStones(color, offsetPoint, checkedPoints));
                     }

@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
 
 
 public class Gui extends JFrame implements Runnable {
@@ -54,10 +53,10 @@ public class Gui extends JFrame implements Runnable {
         dbg.drawImage(board, (int) ((getWidth() / 2) - (board.getWidth() / 2)), (int) ((getHeight() / 2) - (board.getHeight() / 2)), null);
 
         dbg.setColor(Color.BLACK);
-        for (int x = 0; x < Main.stones.length; x++) {
-            for (int y = 0; y < Main.stones[x].length; y++) {
-                if (Main.stones[x][y] == null) continue;
-                if (Main.stones[x][y].getColor() == Stone.Color.BLACK) {
+        for (int x = 0; x < Main.getStones().length; x++) {
+            for (int y = 0; y < Main.getStones()[x].length; y++) {
+                if (Main.getStones()[x][y] == null) continue;
+                if (Main.getStones()[x][y].getColor() == Stone.Color.BLACK) {
                     dbg.setColor(Color.BLACK);
                     dbg.fillOval(x * 30 + boardBeginningX - 7, y * 30 + boardBeginningY - 7, 20, 20);
                 } else {
@@ -66,7 +65,7 @@ public class Gui extends JFrame implements Runnable {
                     dbg.setColor(Color.BLACK);
                     dbg.drawOval(x * 30 + boardBeginningX - 7, y * 30 + boardBeginningY - 7, 20, 20);
                 }
-//                if (Main.stones[x][y].isCounted()) {
+//                if (Main.getStones()[x][y].isCounted()) {
 //                    dbg.setColor(Color.GREEN);
 //                    dbg.drawOval(x * 30 + boardBeginningX - 7, y * 30 + boardBeginningY - 7, 20, 20);
 //                }
@@ -76,18 +75,18 @@ public class Gui extends JFrame implements Runnable {
         //Draw Score
         dbg.setColor(Color.BLACK);
         dbg.setFont(new Font(dbg.getFont().getName(), 0, 50));
-        dbg.drawString("Player One: " + Main.playerOne.points, 100, 100);
+        dbg.drawString("Player One: " + Main.PLAYER_ONE.points, 100, 100);
         dbg.setColor(Color.white);
-        dbg.drawString("Player Two: " + Main.playerTwo.points, (1920 - dbg.getFontMetrics().stringWidth("Player Two: " + Main.playerTwo.points)) - 100, 100);
+        dbg.drawString("Player Two: " + Main.PLAYER_TWO.points, (1920 - dbg.getFontMetrics().stringWidth("Player Two: " + Main.PLAYER_TWO.points)) - 100, 100);
 
         //Draw Buttons
-        dbg.setColor(Main.skipButton.color);
-        dbg.fillRect(Main.skipButton.rectangle.x, Main.skipButton.rectangle.y, Main.skipButton.rectangle.width, Main.skipButton.rectangle.height);
-        dbg.setColor(Main.skipButton.textColor);
-        int length = dbg.getFontMetrics().stringWidth(Main.skipButton.text);
-        dbg.drawString(Main.skipButton.text, (int) (Main.skipButton.rectangle.getMaxX() - Main.skipButton.rectangle.width / 2 - length/2), Main.skipButton.rectangle.y + Main.skipButton.rectangle.height / 2 + 15);
+        dbg.setColor(Main.SKIP_BUTTON.getColor());
+        dbg.fillRect(Main.SKIP_BUTTON.getRectangle().x, Main.SKIP_BUTTON.getRectangle().y, Main.SKIP_BUTTON.getRectangle().width, Main.SKIP_BUTTON.getRectangle().height);
+        dbg.setColor(Main.SKIP_BUTTON.textColor);
+        int length = dbg.getFontMetrics().stringWidth(Main.SKIP_BUTTON.getText());
+        dbg.drawString(Main.SKIP_BUTTON.getText(), (int) (Main.SKIP_BUTTON.getRectangle().getMaxX() - Main.SKIP_BUTTON.getRectangle().width / 2 - length/2), Main.SKIP_BUTTON.getRectangle().y + Main.SKIP_BUTTON.getRectangle().height / 2 + 15);
         ((Graphics2D)dbg).setStroke(new BasicStroke(10));
-        dbg.drawRect(Main.skipButton.rectangle.x, Main.skipButton.rectangle.y, Main.skipButton.rectangle.width, Main.skipButton.rectangle.height);
+        dbg.drawRect(Main.SKIP_BUTTON.getRectangle().x, Main.SKIP_BUTTON.getRectangle().y, Main.SKIP_BUTTON.getRectangle().width, Main.SKIP_BUTTON.getRectangle().height);
 
 
         //Swap Buffer
@@ -106,14 +105,14 @@ public class Gui extends JFrame implements Runnable {
 
         addMouseListener(ListenerFactory.getMouseListener());
 
-        for (int x = 0; x < Main.stones.length; x++) {
-            for (int y = 0; y < Main.stones[x].length; y++) {
-                Main.points[x][y] = new Point(x * 30 + boardBeginningX, y * 30 + boardBeginningY);
+        for (int x = 0; x < Main.getStones().length; x++) {
+            for (int y = 0; y < Main.getStones()[x].length; y++) {
+                Main.getPoints()[x][y] = new Point(x * 30 + boardBeginningX, y * 30 + boardBeginningY);
             }
         }
         Main.board = new Rectangle(boardBeginningX, boardBeginningY, board.getWidth(), board.getHeight());
 
-        Main.skipButton = new Button(new Rectangle(WIDTH/2 - 200, 900, 400, 100), Color.BLACK, "Skip", () -> {
+        Main.SKIP_BUTTON = new Button(new Rectangle(WIDTH/2 - 200, 900, 400, 100), Color.BLACK, "Skip", () -> {
             Main.skip();
         });
     }

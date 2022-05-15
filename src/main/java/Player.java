@@ -12,7 +12,7 @@ public class Player {
 
     public void updateScore() {
         long count = 0L;
-        Stone[][] stones = Main.stones;
+        Stone[][] stones = Main.getStones();
         for (int i = 0; i < stones.length; i++) {
             Stone[] stone = stones[i];
             for (int j = 0; j < stone.length; j++) {
