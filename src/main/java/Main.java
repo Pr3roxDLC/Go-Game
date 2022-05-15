@@ -105,6 +105,8 @@ public class Main {
         REPLAY_BUTTON.setActive(false);
         GAME_STATE = State.ON_GOING;
         stones = new Stone[19][19];
+        PLAYER_ONE.points = 0;
+        PLAYER_TWO.points = 0;
     }
 
 }
