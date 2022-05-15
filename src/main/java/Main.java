@@ -23,12 +23,23 @@ public class Main {
 
     public static void main(String[] args) {
         gui = new Gui();
+        for (int i = 0; i < stones.length; i++) {
+            Stone[] stones1 = stones[i];
+            for (int j = 0; j < stones1.length; j++) {
+                stones[i][j] = new Stone(Stone.Color.BLACK);
+                if(Math.random() > 0.5){
+                    stones[i][j] = new Stone(Stone.Color.WHITE);
+                }
+            }
+        }
+        stones[5][4] = null;
     }
 
     public static void switchPlayer() {
         timesSkipped = 0;
         activePlayer = activePlayer == ActivePlayer.ONE ? ActivePlayer.TWO : ActivePlayer.ONE;
         Main.SKIP_BUTTON.setColor(Main.getActivePlayer().color.getColor());
+        if(isBoardFilled())showEndScreen();
     }
 
     public static void skip() {
@@ -44,6 +55,14 @@ public class Main {
         System.exit(-1);
     }
 
+    public static void showEndScreen(){
+        if(PLAYER_ONE.points > PLAYER_TWO.points){
+
+        }else{
+
+        }
+    }
+
     public static Player getActivePlayer() {
         return activePlayer == ActivePlayer.ONE ? PLAYER_ONE : PLAYER_TWO;
     }
@@ -55,4 +74,16 @@ public class Main {
     public static Point[][] getPoints() {
         return points;
     }
+
+    public static boolean isBoardFilled() {
+        for (int i = 0; i < stones.length; i++) {
+            Stone[] stoneLine = stones[i];
+            for (int j = 0; j < stoneLine.length; j++) {
+                Stone stone = stoneLine[j];
+                if (stone == null) return false;
+            }
+        }
+        return true;
+    }
+
 }

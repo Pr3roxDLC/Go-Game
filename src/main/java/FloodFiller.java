@@ -69,7 +69,9 @@ public class FloodFiller {
                     //Check if stone is of the same color
                     if (Main.getStones()[offsetPoint.x][offsetPoint.y].getColor() == color && !checkedPoints.contains(offsetPoint)) {
                         //repeat for all neighbours, and add all the resulting points to our list
-                        points.addAll(getAllSurroundedStones(color, offsetPoint, checkedPoints));
+                        getAllSurroundedStones(color, offsetPoint, checkedPoints).forEach(n -> {
+                            if(!points.contains(n))points.add(n);
+                        });
                     }
                 } else {
                     foundWithoutNeighbour = true;
