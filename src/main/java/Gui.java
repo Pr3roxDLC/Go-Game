@@ -90,6 +90,28 @@ public class Gui extends JFrame implements Runnable {
         dbg.drawRect(Main.SKIP_BUTTON.getRectangle().x, Main.SKIP_BUTTON.getRectangle().y, Main.SKIP_BUTTON.getRectangle().width, Main.SKIP_BUTTON.getRectangle().height);
 
 
+        if(Main.GAME_STATE!= Main.State.ON_GOING){
+            String text = "";
+            switch (Main.GAME_STATE){
+                case DRAW:
+                    text = "Draw";
+                    break;
+                case PLAYER_ONE_WON:
+                    text = "Player One Wins";
+                    break;
+                case PLAYER_TWO_WON:
+                    text = "Player Two Wins";
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + Main.GAME_STATE);
+            }
+            dbg.setColor(Color.BLACK);
+            dbg.fillRect(WIDTH/2 - 400, HEIGHT/2 - 200, 800, 400);
+            dbg.setColor(Color.WHITE);
+            dbg.drawString(text, WIDTH/2 - dbg.getFontMetrics().stringWidth(text) / 2, HEIGHT/2);
+
+        }
+
         //Swap Buffer
         g.drawImage(dbImage, 0, 0, null);
 

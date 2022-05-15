@@ -17,6 +17,15 @@ public class Main {
     private static final Point[][] points = new Point[19][19];
     public static Rectangle board;
 
+    public static State GAME_STATE = State.ON_GOING;
+
+    public enum State{
+        ON_GOING,
+        PLAYER_ONE_WON,
+        PLAYER_TWO_WON,
+        DRAW
+    }
+
     public enum ActivePlayer {
         ONE, TWO
     }
@@ -52,14 +61,17 @@ public class Main {
     }
 
     public static void giveUp() {
-        System.exit(-1);
+        showEndScreen();
     }
 
     public static void showEndScreen(){
+        System.out.println(PLAYER_ONE.points + " " + PLAYER_TWO.points);
         if(PLAYER_ONE.points > PLAYER_TWO.points){
-
+            GAME_STATE = State.PLAYER_ONE_WON;
+        }else if(PLAYER_ONE.points < PLAYER_TWO.points){
+            GAME_STATE = State.PLAYER_TWO_WON;
         }else{
-
+            GAME_STATE = State.DRAW;
         }
     }
 
@@ -85,5 +97,7 @@ public class Main {
         }
         return true;
     }
+
+
 
 }
